@@ -1,7 +1,7 @@
 import { createMovieProject, addShot, serializeMovie, totalDuration, type MovieProject } from "./movie/movie";
 import { getDefaultAddons, toggleAddon, type BoomAddon } from "./addons/addons";
 
-type Mode = "hub" | "chat" | "game" | "movie";
+type Mode = "hub" | "chat" | "game" | "movie" | "addons";
 
 export function mountStudioShell(app: HTMLElement, setStatus?: (message: string) => void) {
   let mode: Mode = "hub";
@@ -54,8 +54,7 @@ export function mountStudioShell(app: HTMLElement, setStatus?: (message: string)
     mode = next;
     hub.hidden = next !== "hub";
     movieView.hidden = next !== "movie";
-    addonsView.hidden = next !== "hub" && next !== "chat" && next !== "game";
-    if (next === "addons" as Mode) addonsView.hidden = false;
+    addonsView.hidden = next !== "addons";
     if (next === "movie") renderMovie();
     if (next === "hub") {
       addonsView.hidden = true;

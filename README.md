@@ -1,8 +1,12 @@
 # B.O.O.M. Engine
 
+## v0.2 Overdrive Editor
+
+The first major editor upgrade adds a futuristic engine workspace, Three.js transform gizmos, selection outlines, searchable hierarchy, live inspector controls, grid and camera tools, scene statistics, play-mode snapshots, WebXR entry, and a richer local AI Builder.
+
 B.O.O.M. Engine (Build Once. Open More.) is the first working prototype of the B.O.O.M. game-engine/editor concept.
 
-## v0.1 prototype
+## v0.2 prototype
 
 - 3D editor viewport powered by Three.js
 - Scene hierarchy

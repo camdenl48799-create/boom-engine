@@ -346,13 +346,13 @@ function syncTransformFromGizmo() {
   if (!id) return;
   const node = sceneState.nodes[id];
   if (!node) return;
-  node.transform.position.set(object.position);
-  node.transform.rotation.set(
-    THREE.MathUtils.radToDeg(object.rotation.x),
-    THREE.MathUtils.radToDeg(object.rotation.y),
-    THREE.MathUtils.radToDeg(object.rotation.z)
-  );
-  node.transform.scale.set(object.scale);
+  node.transform.position = { x: object.position.x, y: object.position.y, z: object.position.z };
+  node.transform.rotation = {
+    x: THREE.MathUtils.radToDeg(object.rotation.x),
+    y: THREE.MathUtils.radToDeg(object.rotation.y),
+    z: THREE.MathUtils.radToDeg(object.rotation.z)
+  };
+  node.transform.scale = { x: object.scale.x, y: object.scale.y, z: object.scale.z };
   renderInspector();
   refreshSelectionHelper();
 }

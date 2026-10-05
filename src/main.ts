@@ -5,6 +5,7 @@ import { VRButton } from "three/addons/webxr/VRButton.js";
 import { createDefaultScene, createNode, deserializeScene, serializeScene, type BoomScene, type SceneNode } from "./core/scene";
 import { runBuildCommand } from "./core/commands";
 import "./styles.css";
+import { mountStudioShell } from "./studio";
 
 const sceneState: BoomScene = createDefaultScene();
 let selectedId = sceneState.rootId;
@@ -32,7 +33,7 @@ app.innerHTML = [
   '  <header class="topbar">',
   '    <div class="brand"><div class="brand-mark"><span>B</span></div><div><div class="brand-name">B.O.O.M. <span>ENGINE</span></div><div class="brand-subtitle">Build Once. Open More. <b>OVERDRIVE EDITOR</b></div></div></div>',
   '    <div class="project-pill"><span class="pulse-dot"></span> LIVE PROJECT <strong>STARTER</strong></div>',
-  '    <div class="top-actions"><button id="new-scene">New</button><button id="save-scene">Save</button><button id="load-scene">Load</button><button id="play-scene" class="primary">▶ Play</button><button id="vr-scene">◈ VR</button></div>',
+  '    <div class="top-actions"><button id="boom-hub">Hub</button><button id="boom-movie">🎬 Movie</button><button id="boom-addons">🧩 Add-ons</button><button id="new-scene">New</button><button id="save-scene">Save</button><button id="load-scene">Load</button><button id="play-scene" class="primary">▶ Play</button><button id="vr-scene">◈ VR</button></div>',
   '  </header>',
   '  <section class="builder-bar"><div class="ai-badge"><span>✦</span> AI BUILDER</div><div class="builder-input-wrap"><input id="builder-input" autocomplete="off" placeholder="Build something… e.g. add a red cube called Player at 0 1 -3" /><kbd>ENTER</kbd></div><button id="builder-run" class="primary builder-run">Build <span>↵</span></button><div id="builder-status" class="builder-status">Local agent ready • no API key required</div></section>',
   '  <div class="command-strip"><div class="command-group"><span class="command-label">TOOLS</span><button class="tool-button active" data-mode="translate">↔ <b>W</b></button><button class="tool-button" data-mode="rotate">⟳ <b>E</b></button><button class="tool-button" data-mode="scale">⤢ <b>R</b></button><button id="focus-selected" class="tool-button">⌖ <b>F</b></button><button id="toggle-grid" class="tool-button active">▦</button></div><div class="command-group center"><span class="scene-chip">SCENE <b id="scene-name">B.O.O.M. Starter Scene</b></span><span id="mode-chip" class="mode-chip"><span></span> EDIT MODE</span></div><div class="command-group"><span id="viewport-stats" class="viewport-stats">FPS -- · 0 objects · 0 tris</span></div></div>',
@@ -48,9 +49,13 @@ app.innerHTML = [
 ].join("");
 
 setupRenderer();
+const studioShell = mountStudioShell(app, setStatus);
 renderHierarchy();
 renderInspector();
 bindUI();
+document.querySelector("#boom-hub")?.addEventListener("click", () => studioShell.openHub());
+document.querySelector("#boom-movie")?.addEventListener("click", () => studioShell.openMovie());
+document.querySelector("#boom-addons")?.addEventListener("click", () => studioShell.openAddons());
 updateStats();
 animate();
 

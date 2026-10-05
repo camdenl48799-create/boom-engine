@@ -1,24 +1,61 @@
-# B.O.O.M. Engine
+# B.O.O.M. Engine 1.0
 
-## v0.2 Overdrive Editor
+**Build Once. Open More.**
 
-The first major editor upgrade adds a futuristic engine workspace, Three.js transform gizmos, selection outlines, searchable hierarchy, live inspector controls, grid and camera tools, scene statistics, play-mode snapshots, WebXR entry, and a richer local AI Builder.
+B.O.O.M. Engine is a browser-based 3D creation prototype that now brings **Game Studio, Movie Mode, Chat Studio, and an expandable Add-on system** into one workspace.
 
-B.O.O.M. Engine (Build Once. Open More.) is the first working prototype of the B.O.O.M. game-engine/editor concept.
+## B.O.O.M. Hub
 
-## v0.2 prototype
+The engine opens with a central Hub for:
+- Chat Studio
+- Game Studio
+- Movie Mode
+- Add-on Manager
+- Recent projects
 
-- 3D editor viewport powered by Three.js
+## Movie Mode
+
+Movie Mode provides an editable cinematic workflow:
+- Storyboard and scenes
+- Shot-based timeline
+- Cinematic shot creation
+- Camera and director metadata
+- AI Director prompt workflow
+- Movie-specific add-ons
+- Movie project JSON export
+- Shared project concept with Game Studio
+
+The current prototype focuses on real editable cinematic data and preview UI. Full one-click MP4 rendering requires a dedicated video-rendering pipeline and is intentionally not faked.
+
+## Add-ons
+
+B.O.O.M. has an expandable add-on architecture. Built-in expansion points include:
+- Cinematic Cameras+
+- Director AI+
+- Actor & Animation+
+- Cinematic Lighting+
+- Audio Studio+
+- World Builder+
+- Performance Pack
+- VR Creator+
+- Render Studio+
+
+Add-ons expose explicit permissions and can be enabled or disabled independently.
+
+## Game Studio
+
+The original editor remains available with:
+- Three.js 3D viewport
 - Scene hierarchy
-- Inspector for transforms, visibility, names, and colors
-- Cube, sphere, light, and camera creation
-- Local AI Builder command parser (no API key required)
-- JSON scene save/load
+- Inspector
+- Transform gizmos
+- Object creation and editing
+- Local AI Builder
 - Play mode
-- WebXR/VR entry point
-- Unit-tested scene serialization/core data model
+- WebXR entry point
+- Scene save/load
 
-## Run locally
+## Development
 
 ```bash
 npm install
@@ -27,15 +64,27 @@ npm run build
 npm run dev
 ```
 
-Then open the Vite URL shown in the terminal.
+## Architecture
 
-## Example AI Builder commands
+```text
+src/
+├── addons/
+│   ├── addons.ts
+│   └── addons.test.ts
+├── core/
+│   ├── scene.ts
+│   ├── commands.ts
+│   └── commands.test.ts
+├── movie/
+│   ├── movie.ts
+│   └── movie.test.ts
+├── studio.ts
+├── main.ts
+└── styles.css
+```
 
-- `add a red cube called Player at 0 1 -3`
-- `add a blue sphere called Ball`
-- `add a light`
-- `add a camera`
+The movie and add-on data layers are deliberately separated from the existing editor so future releases can expand them without replacing the working Game Studio.
 
 ## Roadmap
 
-The v0.1 editor is intentionally small. The next engine layers can add a real asset pipeline, PBR materials, physics, terrain, scripting, project/package export, Steamworks tooling, Meta publishing helpers, and a native desktop shell without Electron.
+Future B.O.O.M. releases can expand the Movie Mode timeline, actor animation, cinematic cameras, audio, VFX, project packaging, plugin/add-on distribution, AI providers, VR filmmaking, and native/high-quality video rendering.

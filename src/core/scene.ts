@@ -74,15 +74,20 @@ export function createDefaultScene(): BoomScene {
   const light = createNode("directional-light", "Key Light");
   light.transform.position = { x: 4, y: 8, z: 4 };
 
+  const starterCube = createNode("cube", "Starter Cube");
+  starterCube.transform.position = { x: 0, y: 0.8, z: 0 };
+  starterCube.parentId = root.id;
+
   const nodes: Record<string, SceneNode> = {
     root,
     [camera.id]: camera,
     [light.id]: light,
+    [starterCube.id]: starterCube,
   };
 
   camera.parentId = root.id;
   light.parentId = root.id;
-  root.children.push(camera.id, light.id);
+  root.children.push(camera.id, light.id, starterCube.id);
 
   return {
     version: 1,
